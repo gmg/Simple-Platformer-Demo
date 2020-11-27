@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class DeathZone : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            GameEvents.OnPickUpCollected?.Invoke(this);
-            gameObject.SetActive(false);
+            var player = collision.gameObject.GetComponent<PlayerMovement>();
+            player.Die();
         }
     }
 }

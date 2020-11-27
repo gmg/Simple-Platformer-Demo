@@ -24,16 +24,6 @@ public class PlayerMovement : MonoBehaviour
     float hangTime = 0;
     float preJump = 0;
 
-    private void OnEnable()
-    {
-        GameEvents.OnPickUpCollected.AddListener(PickUpCollected);
-    }
-
-    void PickUpCollected(PickUp pickup)
-    {
-        Debug.Log("Woo: " + pickup.Value);
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -125,6 +115,12 @@ public class PlayerMovement : MonoBehaviour
         //    transform.position,
         //    transform.position + (Vector3.down * groundCheckDistance),
         //    whatIsGround);
+    }
+
+    public void Die()
+    {
+        GameEvents.OnPlayerDied?.Invoke();
+        gameObject.SetActive(false);
     }
 
     void OnDrawGizmos()
